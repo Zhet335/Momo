@@ -1,0 +1,75 @@
+{
+  "name": "ai-desktop-pet",
+  "version": "0.1.0",
+  "description": "AI desktop pet powered by Zhipu API",
+  "main": "dist-electron/main/index.js",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"vite\" \"tsc -p electron/tsconfig.json --watch\" \"wait-on tcp:5173 && electron .\"",
+    "build": "vite build && tsc -p electron/tsconfig.json",
+    "dist": "npm run build && electron-builder",
+    "dist:win": "npm run build && electron-builder --win nsis",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.8.1",
+    "dotenv": "^16.4.7",
+    "electron-updater": "^6.3.9",
+    "mammoth": "^1.9.0",
+    "pdf-parse": "^1.1.1",
+    "react": "^18.3.1",
+    "react-markdown": "^9.0.1",
+    "react-dom": "^18.3.1",
+    "remark-gfm": "^4.0.1",
+    "zustand": "^5.0.3"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.3",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "@vitejs/plugin-react": "^4.4.1",
+    "concurrently": "^9.1.2",
+    "electron": "^35.1.4",
+    "electron-builder": "^24.13.3",
+    "typescript": "^5.8.3",
+    "vite": "^5.4.19",
+    "wait-on": "^8.0.3"
+  },
+  "build": {
+    "appId": "com.momo.desktop",
+    "productName": "Momo",
+    "files": [
+      "dist/**",
+      "dist-electron/**",
+      "assets/**",
+      "Voice/**",
+      "package.json"
+    ],
+    "directories": {
+      "buildResources": "assets"
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true
+    },
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "${env.GH_OWNER}",
+        "repo": "${env.GH_REPO}",
+        "releaseType": "release"
+      }
+    ]
+  }
+}
