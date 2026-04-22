@@ -1,1 +1,30 @@
-node_modules
+node_modules/
+
+# Env / secrets
+.env
+.env.*
+!.env.example
+
+# Build outputs
+dist/
+dist-electron/
+release/
+out/
+*.tsbuildinfo
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS / editor temp
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+#Subfiles
+global 备份.css
+index 备份.ts
